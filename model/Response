@@ -1,0 +1,6 @@
+package groupie
+
+type Response struct {
+	Name    string    `json:"name"`
+	Pokemon []interface `json:"pokemon_entries"`
+}

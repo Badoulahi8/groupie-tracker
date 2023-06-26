@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	groupie "groupie-tracker/model"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -35,18 +36,15 @@ func WelcomePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func Artists(w http.ResponseWriter, r *http.Request) {
-	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
-
-	if err != nil {
-		fmt.Print(err.Error())
-		os.Exit(1)
-	}
-
-	responseData, err := ioutil.ReadAll(response.Body)
+	artists, err := groupie.FetchArtists()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Fprintln(w, string(responseData))
+
+	// Print the ID and name of each artist
+	for _, artist := range artists {
+		fmt.Printf("ID: %d, Name: %s\n", artist.Id, artist.Name)
+	}
 }
 
 func Locations(w http.ResponseWriter, r *http.Request) {
@@ -61,6 +59,7 @@ func Locations(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	fmt.Fprintln(w, string(responseData))
 }
 
