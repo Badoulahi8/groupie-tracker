@@ -41,9 +41,7 @@ func Artists(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	for _, artist := range artists {
-		fmt.Printf("ID: %d, Name: %s\n", artist.Id, artist.Name)
-	}
+	renderTemplate(w, "artist", artists)
 }
 
 func Locations(w http.ResponseWriter, r *http.Request) {
@@ -63,7 +61,7 @@ func Locations(w http.ResponseWriter, r *http.Request) {
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string, data interface{}) {
-	t, err := template.ParseFiles(path + tmpl + ".html")
+	t, err := template.ParseFiles(path + tmpl + ".page.tmpl")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
