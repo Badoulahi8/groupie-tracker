@@ -41,7 +41,6 @@ func Artists(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	// Print the ID and name of each artist
 	for _, artist := range artists {
 		fmt.Printf("ID: %d, Name: %s\n", artist.Id, artist.Name)
 	}

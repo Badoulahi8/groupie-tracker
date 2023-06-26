@@ -10,11 +10,12 @@ type Artist struct {
 	Name string `json:"name"`
 }
 
-func FetchArtists() ([]Artist, error) {
-	url := "https://groupietrackers.herokuapp.com/api/artists"
+const (
+	URL = "https://groupietrackers.herokuapp.com/api/artists"
+)
 
-	// Send GET request to the API
-	response, err := http.Get(url)
+func FetchArtists() ([]Artist, error) {
+	response, err := http.Get(URL)
 	if err != nil {
 		return nil, err
 	}
